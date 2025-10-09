@@ -107,8 +107,10 @@ export default function CardLista() {
         }
     }
 
+    
+
     return (
-        <div className="p-6 w-[80vw] h-[80vh] m-auto bg-white rounded-sm mt-[1rem]">
+        <div className="pl-34 pt-6 w-[80vw] h-[80vh] m-auto group  bg-blue rounded-sm mt-[1rem]">
             <h1 className="text-2xl font-bold mb-6 text-[#3B82F6] border-[#3B82F6] border-b-2">
                 {board.titulo}
             </h1>
@@ -118,10 +120,12 @@ export default function CardLista() {
                         <div
                             key={lista.id}
                             className="text-[#3B82F6] bg-[#FFFFFF] p-4 rounded-[8px] shadow-xl w-[15rem] hover:shadow-2xl
-             flex flex-col h-[50vh] min-h-0">
+                            flex flex-col h-[50vh] min-h-0">
                             <div className="flex justify-between">
                                 <h2 className="text-lg font-bold mb-3">{lista.titulo}</h2>
-                                <FaPencil className="cursor-pointer hover:text-blue-300" />
+                                <button>
+                                    <FaPencil className="cursor-pointer hover:text-blue-300" />
+                                </button>
                             </div>
                             {lista.tasks?.length ? (
                                 <ul className="mt-2 flex-1 overflow-y-auto overflow-x-hidden pr-1 space-y-2">
@@ -133,7 +137,7 @@ export default function CardLista() {
                                                 <input type="checkbox" className="cursor-pointer ml-[0.4rem]" />
                                                 <button
                                                     onClick={() => setOpenTaskId(t.id)}
-                                                    className="font-medium ml-[1rem] w-[8.5rem] cursor-pointer text-start"
+                                                    className="font-medium ml-[1rem] w-[8.5rem] cursor-pointer text-start transition-all "
                                                 >
                                                     {t.titulo}
                                                 </button>
@@ -150,21 +154,21 @@ export default function CardLista() {
                                                         <div className="bg-gray-100 rounded-2xl p-5 w-[27rem] h-[20rem] shadow-md shadow-blue-400">
                                                             <div className="flex items-center gap-2 mb-2">
                                                                 <FaRegCalendarCheck className="text-[#3B82F6]" />
-                                                                <h3 className="font-semibold text-[#3B82F6]">Descrição</h3>
+                                                                <h3 className="font-bold  text-[#3B82F6]">Descrição</h3>
                                                                 <div className="ml-[14rem] text-[#3B82F6] cursor-pointer">
-                                                                    <button className="rounded-md border px-3 py-1.5 text-sm hover:bg-blue-50 hover:shadow-2xl ">
+                                                                    <button className="rounded-md border px-3 py-1.5 text-sm bg-[#3B82F6] text-white font-bold hover:shadow-2xl ">
                                                                         Editar
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <p className="text-sm leading-relaxed whitespace-pre-wrap break-words text-[#3B82F6]">
+                                                            <p className="text-sm leading-relaxed whitespace-pre-wrap break-words text-[#3B82F6] bg-white py-2 px-3 rounded-md min-h-[4rem] font-medium  ">
                                                                 {t?.descricao?.trim() ? t.descricao : "Sem descrição"}
                                                             </p>
-                                                            {(t as any)?.prazo && (
+                                                            {t.prazo && (
                                                                 <div className="mt-4 flex items-center gap-2 text-sm text-[#3B82F6]">
                                                                     <span className="font-bold ">Prazo para:</span>
-                                                                    <span className="font-medium opacity-90">
-                                                                        {new Date((t as any).prazo).toLocaleDateString("pt-BR", {
+                                                                    <span className="opacity-90">
+                                                                        {new Date(t.prazo).toLocaleDateString("pt-BR", {
                                                                             day: "2-digit",
                                                                             month: "short",
                                                                             year: "numeric",
@@ -187,12 +191,12 @@ export default function CardLista() {
                                                                         {...register("conteudo", { required: true })}
                                                                         type="text"
                                                                         placeholder="Escreva um comentário…"
-                                                                        className="w-full rounded-md border px-3 py-2 text-sm bg-white outline-none focus:ring-2 focus:ring-blue-600"
+                                                                        className="w-full rounded-md border px-3 py-1.5 text-sm bg-white outline-none focus:ring-2 focus:ring-blue-600"
                                                                     />
                                                                 </div>
                                                                 <button
                                                                     type="submit"
-                                                                    className="rounded-md  px-3 py-2 text-sm bg-[#3B82F6] text-white font-bold cursor-pointer"
+                                                                    className="rounded-md  px-3 py-1.5 text-sm bg-[#3B82F6] text-white font-bold cursor-pointer"
                                                                 >
                                                                     Enviar
                                                                 </button>
@@ -203,8 +207,8 @@ export default function CardLista() {
                                                                     comentarios.map((c) => (
                                                                         <div key={c.id} className="py-1">
                                                                             <p
-                                                                                className="w-full max-w-full bg-white rounded-[20px] px-4 py-2 text-sm text-gray-600 
-                                                 whitespace-pre-wrap break-words"
+                                                                                className="w-full max-w-full bg-white rounded-sm px-4 py-2 text-sm text-gray-600 
+                                                 whitespace-pre-wrap break-words drop-shadow-md"
                                                                             >
                                                                                 <span className="font-semibold text-blue-600">
                                                                                     {c.usuario?.nome || "Usuário desconhecido"}:
